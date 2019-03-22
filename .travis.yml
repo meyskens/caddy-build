@@ -3,32 +3,32 @@ env:
   - CADDY_VERSION=v0.11.5
 language: go
 go:
-- 1.12.x
+  - 1.12.x
 go_import_path: github.com/meyskens/caddy-build
 stages:
-- name: publish
+  - name: publish
 
 jobs:
   include:
-  - name: Publish new build
-    stage: publish
-    script:
-    - go get
-    - mkdir $GOPATH/src/github.com/mholt || true
-    - cd $GOPATH/src/github.com/mholt
-    - rm -fr caddy || true
-    - git clone https://github.com/mholt/caddy.git -b $CADDY_VERSION
-    - cp $GOPATH/src/github.com/meyskens/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddyhttp/plugins.go
-    - cd $GOPATH/src/github.com/mholt/caddy/caddy
-    - go get github.com/caddyserver/builds
-    - go run build.go
-    - tar -cvzf caddy.tar.gz caddy
-  deploy:
-    provider: releases
-    api_key:
-      secure: 34DV1x+timbzs/AxENc+0EgqCPlkCp1pXdCHi1OMR9x2Ky18Tckc8IrMESLQhGZynO02L4oqfsctzsSyPy4UGsQ2t2RinbE6KuUaDzqdtoVit55d1oQCHTfoa+4EwYjz8JmUUKuGrnjLLZWw+CPiM+NQI86mCWLJ1Mjw1m2jARwSEfBr2SlYXv+OojWDs3a/BHCwW877WD9FE4ABXkhCMnAwO4SYSdNFlpjbbLcBbSfJk777KmYCdQy09nPaDoePduYBqwyrXjZdMpoImPQKAsm0fkc4MIuaXMVX5MhUEH+QaU5d24CxGNwuUtsF0ZQT8h40GxOBoWymP47uIGlCOWNVF/7TbOOHJBlh6nGDC6z+oBNKxLoEtUKjALhJUmRxAX5xahM8wqpSVvviMfVIb4xQL6KLoPdkmyQn12wG/Lg/b0JCSekgI+wvPBNzgs+4GDeiB6XcCLIJ3GUMvBy15sm+fv9p6XqvqVXLMCCsz0KXJdlaM2bpvdktfY1R3PZhhehoZw4qV4l8Go+W14iuOUaEtRutUAlQ+zt+cuLLXPkBjeQ5zDSaBdFaxL6vFgCine0AL5NIZfff6m4Mfm8o/9ac2efBqRU4hXTiy9iSLkXHIHyTV288g2e0u5T14AyvdX+KBKcPH0FXnp62/ecclY1vsoX/7LxperJpbIZCV+0=
-    file: $GOPATH/src/github.com/mholt/caddy/caddy/caddy.tar.gz
-    skip_cleanup: true
-    on:
-      repo: meyskens/caddy-build
-      tags: true
+    - name: Publish new build
+      stage: publish
+      script:
+        - go get
+        - mkdir $GOPATH/src/github.com/mholt || true
+        - cd $GOPATH/src/github.com/mholt
+        - rm -fr caddy || true
+        - git clone https://github.com/mholt/caddy.git -b $CADDY_VERSION
+        - cp $GOPATH/src/github.com/meyskens/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddyhttp/plugins.go
+        - cd $GOPATH/src/github.com/mholt/caddy/caddy
+        - go get github.com/caddyserver/builds
+        - go run build.go
+        - tar -cvzf caddy.tar.gz caddy
+      deploy:
+        provider: releases
+        api_key:
+          secure: 34DV1x+timbzs/AxENc+0EgqCPlkCp1pXdCHi1OMR9x2Ky18Tckc8IrMESLQhGZynO02L4oqfsctzsSyPy4UGsQ2t2RinbE6KuUaDzqdtoVit55d1oQCHTfoa+4EwYjz8JmUUKuGrnjLLZWw+CPiM+NQI86mCWLJ1Mjw1m2jARwSEfBr2SlYXv+OojWDs3a/BHCwW877WD9FE4ABXkhCMnAwO4SYSdNFlpjbbLcBbSfJk777KmYCdQy09nPaDoePduYBqwyrXjZdMpoImPQKAsm0fkc4MIuaXMVX5MhUEH+QaU5d24CxGNwuUtsF0ZQT8h40GxOBoWymP47uIGlCOWNVF/7TbOOHJBlh6nGDC6z+oBNKxLoEtUKjALhJUmRxAX5xahM8wqpSVvviMfVIb4xQL6KLoPdkmyQn12wG/Lg/b0JCSekgI+wvPBNzgs+4GDeiB6XcCLIJ3GUMvBy15sm+fv9p6XqvqVXLMCCsz0KXJdlaM2bpvdktfY1R3PZhhehoZw4qV4l8Go+W14iuOUaEtRutUAlQ+zt+cuLLXPkBjeQ5zDSaBdFaxL6vFgCine0AL5NIZfff6m4Mfm8o/9ac2efBqRU4hXTiy9iSLkXHIHyTV288g2e0u5T14AyvdX+KBKcPH0FXnp62/ecclY1vsoX/7LxperJpbIZCV+0=
+        file: $GOPATH/src/github.com/mholt/caddy/caddy/caddy.tar.gz
+        skip_cleanup: true
+        on:
+          repo: meyskens/caddy-build
+          tags: true
