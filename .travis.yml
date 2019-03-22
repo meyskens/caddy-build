@@ -7,7 +7,7 @@ go:
 go_import_path: github.com/meyskens/caddy-build
 stages:
 - name: publish
-  if: branch = master AND type = push
+
 jobs:
   include:
   - name: Publish new build
