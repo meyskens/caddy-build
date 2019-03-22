@@ -15,8 +15,9 @@ jobs:
       stage: publish
       script:
         - go get # Fetches the plugins 
-        - mkdir $GOPATH/src/github.com/mholt
+        - mkdir $GOPATH/src/github.com/mholt || true
         - cd $GOPATH/src/github.com/mholt
+        - rm -fr caddy || true
         - git clone https://github.com/mholt/caddy.git -b $CADDY_VERSION
         - cp $GOPATH/src/github.com/meyskens/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddy/plugins.go
         - cd $GOPATH/src/github.com/mholt/caddy/caddy
