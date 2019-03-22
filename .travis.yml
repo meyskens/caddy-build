@@ -22,7 +22,6 @@ jobs:
     - cd $GOPATH/src/github.com/mholt/caddy/caddy
     - go get github.com/caddyserver/builds
     - go run build.go
-    - ls -l
     - tar -cvzf caddy.tar.gz caddy
   deploy:
     provider: releases
