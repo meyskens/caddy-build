@@ -1,0 +1,25 @@
+env:
+    global:
+      - CADDY_VERSION=v0.11.5
+language: go
+go:
+  - 1.12.x
+go_import_path: github.com/meyskens/caddy-build
+stages:
+  - name: publish
+    if: branch = master AND type = push
+
+jobs:
+  include:
+    - name: Publish new build
+      stage: publish
+      script:
+        - go get # Fetches the plugins 
+        - mkdir $GOPATH/src/github.com/mholt
+        - cd $GOPATH/src/github.com/mholt
+        - git clone https://github.com/mholt/caddy.git -b $CADDY_VERSION
+        - cp $GOPATH/src/github.com/meyskens/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddy/plugins.go
+        - cd $GOPATH/src/github.com/mholt/caddy/caddy
+        - go run build.go
+        - ls -l
+   
