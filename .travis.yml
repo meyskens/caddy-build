@@ -18,7 +18,7 @@ jobs:
         - cd $GOPATH/src/github.com/mholt
         - rm -fr caddy || true
         - git clone https://github.com/mholt/caddy.git -b $CADDY_VERSION
-        - cp $GOPATH/src/github.com/meyskens/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddyhttp/plugins.go
+        - cp $GOPATH/src/github.com/src-d/caddy-build/plugins.go $GOPATH/src/github.com/mholt/caddy/caddyhttp/plugins.go
         - cd $GOPATH/src/github.com/mholt/caddy/caddy
         - go get github.com/caddyserver/builds
         - go run build.go
