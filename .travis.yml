@@ -4,7 +4,7 @@ env:
 language: go
 go:
   - 1.12.x
-go_import_path: github.com/meyskens/caddy-build
+go_import_path: github.com/src-d/caddy-build
 stages:
   - name: publish
 
