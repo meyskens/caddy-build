@@ -12,6 +12,8 @@ jobs:
   include:
     - name: Publish new build
       stage: publish
+      env:
+        - GO111MODULE=on
       script:
         - go get
         - mkdir $GOPATH/src/github.com/caddyserver || true
