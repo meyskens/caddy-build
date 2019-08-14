@@ -1,6 +1,3 @@
-env:
-  global:
-  - CADDY_VERSION=v1.0.2
 language: go
 go:
   - 1.12.x
@@ -16,15 +13,7 @@ jobs:
         - GO111MODULE=on
       install: []
       script:
-        - go get
-        - mkdir $GOPATH/src/github.com/caddyserver || true
-        - cd $GOPATH/src/github.com/caddyserver
-        - rm -fr caddy || true
-        - git clone https://github.com/caddyserver/caddy.git -b $CADDY_VERSION
-        - cp $GOPATH/src/github.com/src-d/caddy-build/plugins.go $GOPATH/src/github.com/caddyserver/caddy/caddyhttp/plugins.go
-        - cd $GOPATH/src/github.com/caddyserver/caddy/caddy
-        - go get github.com/caddyserver/builds
-        - go run build.go
+        - go build -o caddy ./
         - tar -cvzf caddy.tar.gz caddy
       deploy:
         provider: releases
